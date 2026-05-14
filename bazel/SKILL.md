@@ -25,13 +25,13 @@ workspace/
 ├── WORKSPACE.bazel       # External dependencies
 ├── .bazelrc              # Build configurations
 ├── .bazelversion         # Bazel version
-├── BUILD.bazel           # Root build file
+├── BUILD                 # Root build file
 ├── apps/
 │   └── web/
-│       └── BUILD.bazel
+│       └── BUILD
 ├── libs/
 │   └── utils/
-│       └── BUILD.bazel
+│       └── BUILD
 └── tools/
     └── bazel/
         └── rules/
@@ -154,7 +154,7 @@ try-import %workspace%/user.bazelrc
 ### Template 3: TypeScript Library BUILD
 
 ```python
-# libs/utils/BUILD.bazel
+# libs/utils/BUILD
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@npm//:defs.bzl", "npm_link_all_packages")
@@ -195,7 +195,7 @@ jest_test(
 ### Template 4: Python Library BUILD
 
 ```python
-# libs/ml/BUILD.bazel
+# libs/ml/BUILD
 load("@rules_python//python:defs.bzl", "py_library", "py_test", "py_binary")
 load("@pip//:requirements.bzl", "requirement")
 
@@ -308,7 +308,7 @@ bazel query "deps(//...)" --output=package | wc -l
 ### Template 7: Remote Execution Setup
 
 ```python
-# platforms/BUILD.bazel
+# platforms/BUILD
 platform(
     name = "linux_x86_64",
     constraint_values = [
@@ -330,7 +330,7 @@ platform(
     },
 )
 
-# toolchains/BUILD.bazel
+# toolchains/BUILD
 toolchain(
     name = "cc_toolchain_linux",
     exec_compatible_with = [
@@ -372,6 +372,7 @@ bazel build //... --notrack_incremental_state
 - **Enable remote caching** - Share build artifacts
 - **Use visibility wisely** - Enforce architecture
 - **Write BUILD files per directory** - Standard convention
+- **Prefer BUILD over BUILD.bazel** - Standard convention
 
 ### Don'ts
 
